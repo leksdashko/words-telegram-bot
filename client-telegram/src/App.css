@@ -1,0 +1,15 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root{
+	--bg-color: #f3f6ff;
+}
+
+body {
+	/* background: var(--tg-theme-bg-color); */
+	background: var(--bg-color);
+	color: var(--tg-theme-text-color);
+}
