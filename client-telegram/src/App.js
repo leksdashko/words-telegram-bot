@@ -21,7 +21,7 @@ function App() {
 				<Route index element={<Settings />} />
 				<Route path="words/add" element={<AddForm/>} />
 			</Routes>
-    </div>
+    </div> 
   );
 }
 
