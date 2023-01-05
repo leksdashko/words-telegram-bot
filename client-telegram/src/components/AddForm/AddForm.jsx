@@ -3,24 +3,22 @@ import { useTelegram } from '../../hooks/useTelegram';
 import './AddForm.css';
 
 const AddForm = () => {
-	const [country, setCountry] = useState('');
-	const [street, setStreet] = useState('');
-	const [subject, setSubject] = useState('flat');
+	const [phrase, setPhrase] = useState('');
+	const [explanation, setExplanation] = useState('');
 	const {tg} = useTelegram();
 
 	const onSendData = useCallback(() => {
 		const data = {
-			country,
-			street,
-			subject
+			phrase,
+			explanation
 		}
 
 		tg.sendData(JSON.stringify(data));
-	}, [country, street, subject, tg]);
+	}, [phrase, explanation, tg]);
 
 	useEffect(() => {
 		tg.MainButton.setParams({
-			text: 'Submit'
+			text: 'Add new word'
 		});
 
 		tg.onEvent('mainButtonClicked', onSendData);
@@ -31,34 +29,25 @@ const AddForm = () => {
 	}, [onSendData, tg]);
 
 	useEffect(() => {
-		if(!street || !country){
+		if(!phrase || !explanation){
 			tg.MainButton.hide();
 		}else{
 			tg.MainButton.show();
 		}
-	}, [street, country, tg]);
+	}, [phrase, explanation, tg]);
 
-	const onChangeCountry = (e) => {
-		setCountry(e.target.value);
+	const onChangePhrase = (e) => {
+		setPhrase(e.target.value);
 	}
 
-	const onChangeStreet = (e) => {
-		setStreet(e.target.value);
-	}
-
-	const onChangeSubject = (e) => {
-		setSubject(e.target.value);
+	const onChangeExplanation = (e) => {
+		setExplanation(e.target.value);
 	}
 
 	return (
 		<div className='form'>
-			<input className={'input'} onChange={onChangeCountry} value={country} type="text" placeholder={'Country'} />
-			<input className={'input'} onChange={onChangeStreet} value={street} type="text" placeholder={'Street'} />
-			
-			<select value={subject} className={'select'} onChange={onChangeSubject}>
-				<option value={'flat'}>Flat</option>
-				<option value={'house'}>House</option>
-			</select>
+			<input className={'input'} onChange={onChangePhrase} value={phrase} type="text" placeholder={'Phrase'} />
+			<input className={'input'} onChange={onChangeExplanation} value={explanation} type="text" placeholder={'Translation / Explanation'} />
 		</div>
 	)
 }
