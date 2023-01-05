@@ -3,7 +3,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
 
-const webAppUrl = `${process.env.CLIENT_BOT_BASE_URL}/form`;
+const webAppUrl = `${process.env.CLIENT_BOT_BASE_URL}/words/add`;
 
 const bot = new TelegramBot(process.env.TOKEN, {polling: true});
 const app = express();
