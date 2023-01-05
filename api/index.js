@@ -32,8 +32,8 @@ bot.on('message', async (msg) => {
 			const data = JSON.parse(msg.web_app_data.data);
 
 			await bot.sendMessage(chatId, 'Thank you for your connection!');
-			await bot.sendMessage(chatId, 'Your country: ' + data?.country);
-			await bot.sendMessage(chatId, 'Your street: ' + data?.street);
+			await bot.sendMessage(chatId, 'Your country: ' + data?.phrase);
+			await bot.sendMessage(chatId, 'Your street: ' + data?.explanation);
 
 			setTimeout(async () => {
 				await bot.sendMessage(chatId, 'Whole information you will receive in this chat');

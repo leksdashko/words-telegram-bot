@@ -45,10 +45,38 @@ const AddForm = () => {
 	}
 
 	return (
-		<div className='form'>
-			<input className={'input'} onChange={onChangePhrase} value={phrase} type="text" placeholder={'Phrase'} />
-			<input className={'input'} onChange={onChangeExplanation} value={explanation} type="text" placeholder={'Translation / Explanation'} />
-		</div>
+  <div className="mx-auto w-full max-w-[550px]">
+      <div className="-mx-3 flex flex-wrap">
+        <div className="w-full px-3">
+          <div className="mb-5">
+            <label className="mb-3 block text-base font-medium text-[#07074D]">
+              New Phrase
+            </label>
+            <input
+							onChange={onChangePhrase} 
+							value={phrase}
+              type="text"
+              placeholder="Phrase"
+              className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+            />
+          </div>
+        </div>
+        <div className="w-full px-3">
+					<div className="mb-5">
+            <label className="mb-3 block text-base font-medium text-[#07074D]">
+              Translation / Explanation
+            </label>
+            <input
+							onChange={onChangeExplanation} 
+							value={explanation} 
+              type="text"
+              placeholder="Translation"
+              className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+            />
+          </div>
+        </div>
+      </div>
+  </div>
 	)
 }
 
