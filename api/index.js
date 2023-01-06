@@ -1,4 +1,6 @@
 require('dotenv').config();
+require('./models');
+const sequelize = require('./db');
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
@@ -10,6 +12,18 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+
+const start = async () => {
+	try{
+			await sequelize.authenticate();
+			await sequelize.sync();
+	} catch (e) {
+			console.log(e);
+	}
+}
+
+start();
 
 bot.on('message', async (msg) => {
 	const text = msg.text;
