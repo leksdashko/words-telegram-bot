@@ -1,6 +1,6 @@
 require('dotenv').config();
 require('./models');
-//const router = require('./routes');
+const router = require('./routes');
 const sequelize = require('./db');
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-//app.use('/', router);
+app.use('/', router);
 
 
 const start = async () => {
@@ -39,11 +39,8 @@ bot.on('message', async (msg) => {
 
 	if(text === '/start') {
 		const userData = await userService.registration(username);
-		const chatData = await chatService.create(chatId, userData.user);
-
-		console.log(chatData);
-
-		return;
+		
+		await chatService.create(chatId, userData.user);
 
 		await bot.sendMessage(chatId, 'Please set configuration to start learning new words', {
 			reply_markup: {
