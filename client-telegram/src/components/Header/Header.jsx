@@ -1,13 +1,12 @@
 import React from 'react'
 import { useTelegram } from '../../hooks/useTelegram';
-import Button from '../Button/Button';
 import './Header.css';
 
 const Header = () => {
 	const {user} = useTelegram();
 
 	return (
-		<header className={'header'}>
+		<header className={'header px-3'}>
 			<span className={'username'}>
 				{user?.username ? user?.username : 'Hi there!'}
 			</span>
