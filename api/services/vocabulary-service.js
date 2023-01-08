@@ -4,6 +4,8 @@ const ChatModel = require('../models/chat-model');
 
 class VocabularyService {
     async add(chatId, word, meaning) {
+			chatId = chatId.toString();
+			
 			const chat = await ChatModel.findOne({where: {chatId}});
 			if(!chat){
 				throw ApiError.BadRequest('Chat ID is not correct');
