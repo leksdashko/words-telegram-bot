@@ -1,9 +1,12 @@
 require('dotenv').config();
 require('./models');
+//const router = require('./routes');
 const sequelize = require('./db');
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
+const userService = require('./services/user-service');
+const chatService = require('./services/chat-service');
 
 const webAppUrl = `${process.env.CLIENT_BOT_BASE_URL}/words/add`;
 
@@ -12,12 +15,16 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+//app.use('/', router);
 
 
 const start = async () => {
 	try{
 			await sequelize.authenticate();
 			await sequelize.sync();
+
+			const PORT = process.env.PORT;
+			app.listen(PORT, () => console.log('Server started on PORT = ' + PORT));
 	} catch (e) {
 			console.log(e);
 	}
@@ -28,10 +35,16 @@ start();
 bot.on('message', async (msg) => {
 	const text = msg.text;
 	const chatId = msg.chat.id;
-
-	console.log(text);
+	const username = msg?.from?.username.length > 0 ? msg.from.username : chatId;
 
 	if(text === '/start') {
+		const userData = await userService.registration(username);
+		const chatData = await chatService.create(chatId, userData.user);
+
+		console.log(chatData);
+
+		return;
+
 		await bot.sendMessage(chatId, 'Please set configuration to start learning new words', {
 			reply_markup: {
 				keyboard: [
@@ -57,6 +70,8 @@ bot.on('message', async (msg) => {
 		}
 	}
 });
+
+
 
 app.post('/web-data', async (req, res) => {
 	const {queryId, products, totalPrice} = req.body;
@@ -84,5 +99,3 @@ app.post('/web-data', async (req, res) => {
 	}
 });
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => console.log('Server started on PORT = ' + PORT));
