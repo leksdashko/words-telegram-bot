@@ -11,7 +11,7 @@ class VocabularyService {
 				throw ApiError.BadRequest('Chat ID is not correct');
 			}
 			
-			const wordModel = await WordModel.create({word, meaning, userId: chat.userId});
+			const wordModel = await WordModel.create({value: word, meaning, userId: chat.userId});
 			const wordDto = new WordDto(wordModel);
 
 			return {
