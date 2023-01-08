@@ -1,5 +1,6 @@
 const WordModel = require('../models/word-model');
 const WordDto = require('../dtos/word-dto');
+const ChatModel = require('../models/chat-model');
 
 class VocabularyService {
     async add(chatId, word, meaning) {

@@ -49,6 +49,7 @@ const AddForm = () => {
 	const addNewWord = () => {
 		console.log(user);
 		axios.post('/vocabulary', {
+			chatId: 701704536,
 			word: phrase,
 			meaning: explanation
 		})
