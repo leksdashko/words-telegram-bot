@@ -116,7 +116,7 @@ const AddForm = () => {
 			</div>
 
 			<ul className="divide-y divide-gray-200">
-				{words.map((word) => (
+				{words && words.map((word) => (
 					<li key={word.id} className="py-4 flex">
 						<img className="h-10 w-10 rounded-full" src={''} alt="" />
 						<div className="ml-3">
