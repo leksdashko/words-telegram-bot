@@ -11,7 +11,7 @@ class VocabularyController {
 			}
     }
 
-		async get(req, res, next) {
+		async getList(req, res, next) {
 			try {
 				const {chatId, limit} = req.body;
 				const list = await vocabularyService.getList(chatId, limit);

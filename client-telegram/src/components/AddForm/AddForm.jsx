@@ -57,7 +57,7 @@ const AddForm = () => {
 		.then(function () {
 			// always executed
 		}); 
-	});
+	}, []);
 
 	const onChangePhrase = (e) => {
 		setPhrase(e.target.value);
