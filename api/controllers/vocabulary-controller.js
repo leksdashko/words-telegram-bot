@@ -10,6 +10,16 @@ class VocabularyController {
 					next(e);
 			}
     }
+
+		async get(req, res, next) {
+			try {
+				const {chatId, limit} = req.body;
+				const list = await vocabularyService.getList(chatId, limit);
+				return res.json(list);
+			} catch (e) {
+					next(e);
+			}
+    }
 }
 
 module.exports = new VocabularyController();

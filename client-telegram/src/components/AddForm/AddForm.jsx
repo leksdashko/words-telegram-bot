@@ -6,8 +6,11 @@ import './AddForm.css';
 const AddForm = () => {
 	const [phrase, setPhrase] = useState('');
 	const [explanation, setExplanation] = useState('');
-	const {tg, user} = useTelegram();
+	const {tg} = useTelegram();
+	const [words, setWords] = useState([]);
 	const axios = useAxios();
+
+	const chatID = 701704536;
 
 	const onSendData = useCallback(() => {
 		const data = {
@@ -38,6 +41,24 @@ const AddForm = () => {
 		}
 	}, [phrase, explanation, tg]);
 
+	useEffect(() => {
+		axios.get('/vocabulary', {
+			params: {
+				chatId: chatID,
+				limit: 10
+			}
+		})
+		.then(function (response) {
+			console.log(response);
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
+		.then(function () {
+			// always executed
+		}); 
+	});
+
 	const onChangePhrase = (e) => {
 		setPhrase(e.target.value);
 	}
@@ -47,13 +68,15 @@ const AddForm = () => {
 	}
 
 	const addNewWord = () => {
-		console.log(user);
 		axios.post('/vocabulary', {
-			chatId: 701704536,
+			chatId: chatID,
 			word: phrase,
 			meaning: explanation
 		})
 		.then(function (response) {
+			setPhrase('');
+			setExplanation('');
+
 			console.log(response);
 		})
 		.catch(function (error) {
