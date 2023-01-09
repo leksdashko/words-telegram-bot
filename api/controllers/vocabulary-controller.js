@@ -13,8 +13,8 @@ class VocabularyController {
 
 		async getList(req, res, next) {
 			try {
-				console.log(req);
-				const {chatId, limit} = req.params;
+				console.log(req.query);
+				const {chatId, limit} = req.query;
 				const list = await vocabularyService.getList(chatId, limit);
 				return res.json(list);
 			} catch (e) {
