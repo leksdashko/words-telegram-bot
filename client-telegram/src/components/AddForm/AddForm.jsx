@@ -14,8 +14,8 @@ const AddForm = () => {
 
 	const onSendData = useCallback(() => {
 		const data = {
-			phrase,
-			explanation
+			words,
+			tg
 		}
 
 		tg.sendData(JSON.stringify(data));
@@ -23,7 +23,7 @@ const AddForm = () => {
 
 	useEffect(() => {
 		tg.MainButton.setParams({
-			text: 'Add new word'
+			text: 'Start learning'
 		});
 
 		tg.onEvent('mainButtonClicked', onSendData);

@@ -45,7 +45,7 @@ bot.on('message', async (msg) => {
 		await bot.sendMessage(chatId, 'Please set configuration to start learning new words', {
 			reply_markup: {
 				keyboard: [
-					[{text: 'Settings', web_app: {url: webAppUrl}}]
+					[{text: 'Add new', web_app: {url: webAppUrl}}]
 				]
 			}
 		})
@@ -55,12 +55,13 @@ bot.on('message', async (msg) => {
 		try{
 			const data = JSON.parse(msg.web_app_data.data);
 
+			console.log(data?.tg);
+
 			await bot.sendMessage(chatId, 'Thank you for your connection!');
-			await bot.sendMessage(chatId, 'Your country: ' + data?.phrase);
-			await bot.sendMessage(chatId, 'Your street: ' + data?.explanation);
+			await bot.sendMessage(chatId, 'Your words: ' + JSON.stringify(data?.words));
 
 			setTimeout(async () => {
-				await bot.sendMessage(chatId, 'Whole information you will receive in this chat');
+				await bot.sendMessage(chatId, 'The next step is receiving messages from this bot, word by word');
 			}, 3000);
 		}catch(e){
 			console.log(e);
