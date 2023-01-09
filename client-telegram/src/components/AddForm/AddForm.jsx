@@ -41,22 +41,23 @@ const AddForm = () => {
 		}
 	}, [phrase, explanation, tg]);
 
-	useEffect(() => {
+	const updateWordsList = () => {
 		axios.get('/vocabulary', {
 			params: {
 				chatId: chatID,
 				limit: 10
 			}
 		})
-		.then(function (response) {
-			console.log(response);
+		.then(function ({data}) {
+			setWords(data);
 		})
 		.catch(function (error) {
 			console.log(error);
-		})
-		.then(function () {
-			// always executed
-		}); 
+		});
+	}
+
+	useEffect(() => {
+		updateWordsList();
 	}, []);
 
 	const onChangePhrase = (e) => {
@@ -77,7 +78,7 @@ const AddForm = () => {
 			setPhrase('');
 			setExplanation('');
 
-			console.log(response);
+			updateWordsList();
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -88,7 +89,7 @@ const AddForm = () => {
   	<div className="w-full px-3">
 			<div className="mb-5">
 				<label className="mb-3 block text-base text-[#07074D]">
-					New Phrase
+					New Word / Phrase
 				</label>
 				<input
 					onChange={onChangePhrase} 
@@ -113,6 +114,18 @@ const AddForm = () => {
 			<div className=" mb-5">
 				<button onClick={addNewWord} className="w-full bg-blue-500 hover:bg-blue-700 text-white py-3 px-4 border rounded">Add new word</button>
 			</div>
+
+			<ul className="divide-y divide-gray-200">
+				{words.map((word) => (
+					<li key={word.id} className="py-4 flex">
+						<img className="h-10 w-10 rounded-full" src={''} alt="" />
+						<div className="ml-3">
+							<p className="text-sm font-medium text-gray-900">{word.value}</p>
+							<p className="text-sm text-gray-500">{word.meaning}</p>
+						</div>
+					</li>
+				))}
+			</ul>
   	</div>
 	)
 }

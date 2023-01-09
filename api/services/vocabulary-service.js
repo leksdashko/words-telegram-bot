@@ -32,7 +32,7 @@ class VocabularyService {
 				throw ApiError.BadRequest('Chat ID is not correct');
 			}
 
-			const words = await WordModel.findAll({where: {userId: chat.userId}, limit});
+			const words = await WordModel.findAll({where: {userId: chat.userId}, limit, order: [['id', 'DESC']]});
 
 			const list = words.map((word) => {
 				return new WordDto(word);
