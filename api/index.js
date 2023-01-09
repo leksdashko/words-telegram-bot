@@ -45,7 +45,7 @@ bot.on('message', async (msg) => {
 		await bot.sendMessage(chatId, 'Please set configuration to start learning new words', {
 			reply_markup: {
 				keyboard: [
-					[{text: 'Add new', web_app: {url: webAppUrl}}]
+					[{text: 'Add new', web_app: {url: webAppUrl + '?chatId=' + chatId}}]
 				]
 			}
 		})

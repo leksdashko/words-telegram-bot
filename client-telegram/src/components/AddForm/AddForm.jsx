@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useAxios } from '../../hooks/useAxios';
 import { useTelegram } from '../../hooks/useTelegram';
+import { useSearchParams } from "react-router-dom";
 import './AddForm.css';
 
 const AddForm = () => {
@@ -9,13 +10,12 @@ const AddForm = () => {
 	const {tg} = useTelegram();
 	const [words, setWords] = useState([]);
 	const axios = useAxios();
-
-	const chatID = 701704536;
+	const [searchParams] = useSearchParams();
+	const chatId = searchParams.get("chatId");
 
 	const onSendData = useCallback(() => {
 		const data = {
-			words,
-			tg
+			words
 		}
 
 		tg.sendData(JSON.stringify(data));
@@ -44,7 +44,7 @@ const AddForm = () => {
 	const updateWordsList = () => {
 		axios.get('/vocabulary', {
 			params: {
-				chatId: chatID,
+				chatId: chatId,
 				limit: 10
 			}
 		})
@@ -70,7 +70,7 @@ const AddForm = () => {
 
 	const addNewWord = () => {
 		axios.post('/vocabulary', {
-			chatId: chatID,
+			chatId: chatId,
 			word: phrase,
 			meaning: explanation
 		})
