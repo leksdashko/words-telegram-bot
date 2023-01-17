@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useAxios } from '../../hooks/useAxios';
 import { useTelegram } from '../../hooks/useTelegram';
 import { useSearchParams } from "react-router-dom";
+import { PaperClipIcon } from '@heroicons/react/24/solid'
 import './AddForm.css';
 
 const AddForm = () => {
@@ -117,8 +118,10 @@ const AddForm = () => {
 
 			<ul className="divide-y divide-gray-200">
 				{words && words.map((word) => (
-					<li key={word.id} className="py-4 flex">
-						<img className="h-10 w-10 rounded-full" src={''} alt="" />
+					<li key={word.id} className="py-3 flex">
+						<div className="px-2 text-xs text-gray-400">
+							<PaperClipIcon className="h-6 align-middle w-6 text-blue-500"/>
+						</div>
 						<div className="ml-3">
 							<p className="text-sm font-medium text-gray-900">{word.value}</p>
 							<p className="text-sm text-gray-500">{word.meaning}</p>
