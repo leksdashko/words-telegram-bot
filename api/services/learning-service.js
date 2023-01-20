@@ -17,17 +17,17 @@ class LearningService {
 				throw ApiError.BadRequest('Chat ID is not correct');
 			}
 
-			const numbers = createArrayOfNumbers(countWords);
-			const numbersList = shuffleArray(numbers);
+			const numbersList = shuffleArray(createArrayOfNumbers(countWords));
 
 			const intervalId = setInterval(async () => {
-				const currentId = numbersList.pop();
-
-				if(numbersList.length < 5){
-					numbersList.unshift(...shuffleArray(numbers));
+				console.log(numbersList);
+				
+				if(numbersList.length < 1){
+					const newNumbersList = shuffleArray(createArrayOfNumbers(countWords));
+					numbersList.unshift(...newNumbersList);
 				}
 
-				console.log(numbersList);
+				const currentId = numbersList.pop();
 
 				const wordObj = words[currentId];
 

@@ -35,11 +35,11 @@ const AddForm = () => {
 	}, [onSendData, tg]);
 
 	useEffect(() => {
-		if(!phrase || !explanation){
-			tg.MainButton.hide();
-		}else{
-			tg.MainButton.show();
-		}
+		// if(!phrase || !explanation){
+		// 	tg.MainButton.hide();
+		// }
+		
+		tg.MainButton.show();
 	}, [phrase, explanation, tg]);
 
 	const updateWordsList = () => {
