@@ -17,19 +17,18 @@ class LearningService {
 				throw ApiError.BadRequest('Chat ID is not correct');
 			}
 
-			const numbers = createArrayOfNumbers(countWords);
-			const numbersList = shuffleArray(numbers);
+			let numbersList = shuffleArray(createArrayOfNumbers(countWords));
 
 			const intervalId = setInterval(async () => {
 				console.log(numbersList);
 				if(!numbersList){
-					numbersList = shuffleArray(numbers);
+					numbersList = shuffleArray(createArrayOfNumbers(countWords));
 				}
 				const currentId = numbersList.pop();
 
 				const wordObj = words[currentId];
 
-				await bot.sendMessage(chatId, wordObj.value);
+				await bot.sendMessage(chatId, wordObj.value + ' - ' + wordObj.meaning);
 			}, 3000);
 
 			setTimeout(() => {

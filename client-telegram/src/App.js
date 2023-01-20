@@ -14,7 +14,7 @@ function App() {
 	}, [tg]);
 
   return (
-    <div className="App">
+    <div className="App bg-slate-100">
       <Header/>
 			
 			<Routes>
