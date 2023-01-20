@@ -18,13 +18,13 @@ class LearningService {
 			}
 
 			const numbers = createArrayOfNumbers(countWords);
-			let numbersList = shuffleArray(numbers);
+			const numbersList = shuffleArray(numbers);
 
 			const intervalId = setInterval(async () => {
 				const currentId = numbersList.pop();
 
 				if(numbersList.length < 5){
-					numbersList = shuffleArray(numbers);
+					numbersList.unshift(...shuffleArray(numbers));
 				}
 
 				console.log(numbersList);
