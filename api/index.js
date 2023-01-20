@@ -7,6 +7,7 @@ const express = require('express');
 const cors = require('cors');
 const userService = require('./services/user-service');
 const chatService = require('./services/chat-service');
+const learningService = require('./services/learning-service');
 
 const webAppUrl = `${process.env.CLIENT_BOT_BASE_URL}/words/add`;
 
@@ -54,15 +55,12 @@ bot.on('message', async (msg) => {
 	if(msg?.web_app_data?.data) {
 		try{
 			const data = JSON.parse(msg.web_app_data.data);
-
-			console.log(data?.tg);
+			const words = data?.words;
 
 			await bot.sendMessage(chatId, 'Thank you for your connection!');
-			await bot.sendMessage(chatId, 'Your words: ' + JSON.stringify(data?.words));
+			await bot.sendMessage(chatId, 'Your words: ' + JSON.stringify(words));
 
-			setTimeout(async () => {
-				await bot.sendMessage(chatId, 'The next step is receiving messages from this bot, word by word');
-			}, 3000);
+			return learningService.startInterval(chatId, words);
 		}catch(e){
 			console.log(e);
 		}
