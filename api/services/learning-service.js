@@ -20,14 +20,12 @@ class LearningService {
 			const numbersList = shuffleArray(createArrayOfNumbers(countWords));
 
 			const intervalId = setInterval(async () => {
-				console.log(numbersList);
-				
+				const currentId = numbersList.pop();
+
 				if(numbersList.length < 1){
 					const newNumbersList = shuffleArray(createArrayOfNumbers(countWords));
 					numbersList.unshift(...newNumbersList);
 				}
-
-				const currentId = numbersList.pop();
 
 				const wordObj = words[currentId];
 
