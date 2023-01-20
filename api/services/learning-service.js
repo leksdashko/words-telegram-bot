@@ -21,11 +21,13 @@ class LearningService {
 			let numbersList = shuffleArray(numbers);
 
 			const intervalId = setInterval(async () => {
-				console.log(numbersList);
-				if(numbersList.length < 1){
+				const currentId = numbersList.pop();
+
+				if(numbersList.length < 5){
 					numbersList = shuffleArray(numbers);
 				}
-				const currentId = numbersList.pop();
+
+				console.log(numbersList);
 
 				const wordObj = words[currentId];
 
