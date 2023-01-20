@@ -60,7 +60,7 @@ bot.on('message', async (msg) => {
 			await bot.sendMessage(chatId, 'Thank you for your connection!');
 			await bot.sendMessage(chatId, 'Your words: ' + JSON.stringify(words));
 
-			return learningService.startInterval(chatId, words);
+			return learningService.startInterval(bot, chatId, words);
 		}catch(e){
 			console.log(e);
 		}

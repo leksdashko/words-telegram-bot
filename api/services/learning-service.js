@@ -2,13 +2,10 @@ const WordModel = require('../models/word-model');
 const WordDto = require('../dtos/word-dto');
 const ChatModel = require('../models/chat-model');
 const ApiError = require('../exceptions/api-error');
-const TelegramBot = require('node-telegram-bot-api');
-const { shuffleArray } = require('../utils');
-
-const bot = new TelegramBot(process.env.TOKEN, {polling: true});
+const { shuffleArray, createArrayOfNumbers } = require('../utils');
 
 class LearningService {
-    async startInterval(chatId, words) {
+    async startInterval(bot, chatId, words) {
 			const countWords = words.length;
 			if(!countWords){
 				throw ApiError.BadRequest('Add new words to your vocabulary');
