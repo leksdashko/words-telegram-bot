@@ -9,7 +9,7 @@ const userService = require('./services/user-service');
 const chatService = require('./services/chat-service');
 const learningService = require('./services/learning-service');
 
-const webAppUrl = `${process.env.CLIENT_BOT_BASE_URL}/words/add`;
+const webAppUrl = process.env.CLIENT_BOT_BASE_URL;
 
 const bot = new TelegramBot(process.env.TOKEN, {polling: true});
 const app = express();
@@ -46,8 +46,13 @@ bot.on('message', async (msg) => {
 		await bot.sendMessage(chatId, 'Please set configuration to start learning new words', {
 			reply_markup: {
 				keyboard: [
-					[{text: 'Add new', web_app: {url: webAppUrl + '?chatId=' + chatId}}]
-				]
+					[
+						{text: 'Add new', web_app: {url: webAppUrl + '/words/add?chatId=' + chatId}},
+						{text: 'Learning'},
+						{text: 'Settings', web_app: {url: webAppUrl + '?chatId=' + chatId}}
+					]
+				],
+				resize_keyboard: true
 			}
 		})
 	}
